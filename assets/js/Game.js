@@ -1,19 +1,36 @@
 
-        // funcion que se ejecta al iniciar
-        window.onload=function()
-        {
-            // posicionamos la pelota de manera aleatoria en la pantalla
-                        y=Math.floor((Math.random() * (document.getElementById("Montaje").offsetHeight-22)) + 1);
-            x=Math.floor((Math.random() * (document.getElementById("Montaje").offsetWidth-22)) + 1);
- 
-            document.getElementById("Compa1").style.left=String(x)+"px";
-            document.getElementById("Compa1").style.top=String(y)+"px";
-        }
+        
+       
+window.onload = function()  /*funcion que se ejecuta al terminar la carga del documento*/
+
+{
+/*posicionamos la pelota de manera aleatoria en la pantalla*/
+    
+    /*********************BUG!!! no es responsive*****************/
+    /*Pensar como posicionar nuevamente la imagen tras un cambio del tamaño de la ventana 
+    *Asumir mediadas relativas y calcular respecto estas el random 
+    *
+    */
+    var y = Math.floor((Math.random() * (document.getElementById("Montaje").offsetHeight-22)) + 1);
+    /*offsetHeight -> Extrae el alto de un elemento con padding y bordes*/
+    var x = Math.floor((Math.random() * (document.getElementById("Montaje").offsetWidth-22)) + 1);
+    /*offsetHeight -> Extrae el alto de un elemento con padding y bordes*/
+    document.getElementById("Compa1").style.left=String(x)+"px";
+    /*Cambiamos la posicion de la pelota aletrando el CSS*/
+    document.getElementById("Compa1").style.top=String(y)+"px";
+    
+  
+    
+    
+    
+    
+}
  
  
      
-     function moverElemento(){
-     var elemento =document.getElementById('Compa1');
+function moverElemento(){
+
+    var elemento =document.getElementById('Compa1');
          
      var posicion = elemento.clientLeft;
      
@@ -21,7 +38,8 @@
          elemento.style.left = (posicion + 1) + "px";
          setTimeout("moverElemento()",1000);
          
-     }   
+     
+}   
      
      /*var Compa1 = document.getElementById('Compa1');
                 Compa1.onclick = function () {
@@ -55,50 +73,62 @@
         // definimos la velocidad de movimiento en pixels
         var velocidad=1;
  
-        // variable que contiene 
-        var idSetInterval=0;
+/*variable que inicia el boton contiene */
+var idSetInterval = 0;
+
+/*funcion que se ejecuta al pulsar el botón iniciar*/
+function iniciar(){    
+    
+    if( idSetInterval == 0){
+            idSetInterval=setInterval("mover()",0);
+            
+    }
+}
  
-        // funcion que se ejecuta al pulsar el botón iniciar
-        function iniciar()
-        {
-            if(idSetInterval==0)
-            {
-                idSetInterval=setInterval("mover()",1);
-            }
-        }
- 
-        // funcion que se ejecuta por cada iteracion del setInterval()
+        /*funcion que se ejecuta por cada iteracion del setInterval()*/
         function mover()
         {
-            // vertical
-            if(controlY==1)
-            {
+            /*Control  vertical*/
+            if( controlY == 1 ){
+                
                 y+=velocidad;
+                
             }else{
+                
                 y-=velocidad;
+                
             }
-            if(y<0)
-            {
+            
+            if( y < 0 ){
+                
                 controlY=1;
                 y=velocidad;
-            }else if(y>=document.getElementById("Montaje").offsetHeight-22){
+                
+            }else if( y >= document.getElementById("Montaje").offsetHeight-22){
+                
                 controlY=0;
                 y=document.getElementById("Montaje").offsetHeight-22;
+                
             }
  
-            // horizontal
+            /* Control horizontal*/
             if(controlX==1)
             {
+                
                 x+=velocidad;
+                
             }else{
+                
                 x-=velocidad;
+                
             }
  
-            if(x<0)
-            {
+            if(x<0){
+                
                 controlX=1;
                 x=velocidad;
-            }else if(x>=document.getElementById("Montaje").offsetWidth-22){
+                
+            }else if( x >= document.getElementById("Montaje").offsetWidth-22){
                 controlX=0;
                 x=document.getElementById("Montaje").offsetWidth-22;
             }
